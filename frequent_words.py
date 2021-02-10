@@ -1,4 +1,4 @@
-def frequentWords(pattern: str, k : int) -> dict:
+def frequentWords(pattern: str, k : int, limit=0) -> dict:
     """
         returns the most frequent k-mers in a genomic pattern
     """
@@ -11,9 +11,10 @@ def frequentWords(pattern: str, k : int) -> dict:
         else:
             res[key] = 1
     # get the highest occurence in the pattern
-    high = max(res.values())
+    if limit == 0:
+        limit = max(res.values())
     for i in res.keys():
-        if res[i] == high:
+        if res[i] >= limit:
             frequent.append(i)
 
     output = ' '.join(frequent)
