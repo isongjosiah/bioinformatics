@@ -21,24 +21,28 @@ def neighbors(pattern: str, d: int) -> list:
     """
     This generates the d-neighborhood Neighbors(Pattern, d)
     """
-    neighborhood: set = set()
     if d == 0:
-        return [pattern]
+        return pattern
     if len(pattern) == 1:
         return ["A", "C", "G", "T"]
 
+    neighborhood: list = []
     first_symbol = pattern[0]
-    suffix_neighbors = neighbors(pattern[1:], d)
+    suffix = pattern[1:]
+    suffix_neighbors = neighbors(suffix, d)
     for text in suffix_neighbors:
-        if hamming_distance(pattern[1:], text) < d:
+        print("suffix neighbors", suffix_neighbors)
+        if hamming_distance(text, suffix) < d:
             for base in "ACGT":
                 text = base + text
-                neighborhood.add(text)
+                print(neighborhood)
+                neighborhood.append(text)
+                print(neighborhood)
         else:
             text = first_symbol + text
-            neighborhood.add(text)
-    print(neighborhood)
+            neighborhood.append(text)
+        print("end of for loop", suffix_neighbors)
     return neighborhood
 
 
-print(" ".join(neighbors("ACG", 1)))
+print((neighbors("CAA", 1)))
