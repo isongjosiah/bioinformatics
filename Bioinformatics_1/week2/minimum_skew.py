@@ -43,12 +43,13 @@ if __name__ == "__main__":
     sequence = sys.argv[1]
 
     # if entry is a file, read content of file
-    if os.path.isfile(sequence) and os.path.exists(sequence):
-        with open(sequence) as f:
-            sequence = f.read().replace('\n', '')
-    else:
-        print(f"File {sequence} does not exist")
-        sys.exit()
+    if os.path.isfile(sequence):
+        if os.path.exists(sequence):
+            with open(sequence) as f:
+                sequence = f.read().replace('\n', '')
+        else:
+            print(f"File {sequence} does not exist")
+            sys.exit()
 
     mi = minimum_skews(sequence)
     print(f"minimum index of genome is {mi}")
