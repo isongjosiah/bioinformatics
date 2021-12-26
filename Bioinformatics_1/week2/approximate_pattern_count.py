@@ -19,5 +19,6 @@ def approximate_pattern_count(genome: str, pattern: str, n: int) -> int:
 
 genome = sys.argv[1]
 pattern = sys.argv[2]
-count = approximate_pattern_count(genome, pattern, 3)
+n = sys.argv[3]
+count = approximate_pattern_count(genome, pattern, 2)
 print("count: ", count)

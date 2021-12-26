@@ -1,4 +1,6 @@
-def hamming_distance(kmer_1: str, kmer_2: str) -> int:
+import sys
+
+def hamming_distance(kmer_1 , kmer_2):
     """
      hamming_distance calculates the mismatch between two kmers
      params:
@@ -25,8 +27,9 @@ def hamming_distance(kmer_1: str, kmer_2: str) -> int:
     return hamming_distance
 
 
-list_1 = "CAGAAAGGAAGGTCCCCATACACCGACGCACCAGTTTA"
-list_2 = "CACGCCGTATGCATAAACGAGCCGCACGAACCAGAGAG"
+list_1 = sys.argv[1]
+list_2 = sys.argv[2]
+print(list_1)
 
 x = hamming_distance(list_1, list_2)
 print("hamming distance", x)
