@@ -16,11 +16,9 @@ def approximate_pattern_matching(sequence: str, kmer_pattern: str, tolerance: in
     """
     output: list = []
     k = len(kmer_pattern)
-    gl = len(sequence) - k
+    gl = (len(sequence) - k) + 1
     for i in range(gl):
         k_mer = sequence[i: i + k]
-        """if this is an issue, try to find a better way to take care of cases where the length of the remaining 
-        string is less than the length of the pattern """
         hd = hamming_distance(kmer_pattern, k_mer)
         if hd <= int(tolerance):
             output.append(i)
@@ -29,7 +27,7 @@ def approximate_pattern_matching(sequence: str, kmer_pattern: str, tolerance: in
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        print("[Usage]: python approx_pattern_matching.py file")
+        print("[Usage]: python approximate_pattern_matching.py file")
         quit()
     file_input = sys.argv[1]
     pattern = ""
@@ -44,7 +42,14 @@ if __name__ == "__main__":
     else:
         print(f"File {file_input} does not exist")
         quit()
-    print(n)
-    indexes = approximate_pattern_matching(genome, pattern, n)
-    print(f"starting indexes for matching pattern is {str(indexes).replace(',', ' ')}")
 
+    # Because you are reading from a file, remember to strip the newline characters
+    # or else it will mess you up
+    pattern = pattern.strip()
+    genome = genome.strip()
+    if len(genome) > len(pattern):
+        indexes = approximate_pattern_matching(genome, pattern, n)
+    else:
+        indexes = approximate_pattern_matching(pattern, genome, n)
+
+    print(f"starting indexes for matching pattern is {str(indexes).replace(',', ' ')}")

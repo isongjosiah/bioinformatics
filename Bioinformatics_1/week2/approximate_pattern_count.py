@@ -1,4 +1,4 @@
-from approx_pattern_matching import approximate_pattern_matching
+from approximate_pattern_matching import approximate_pattern_matching
 import sys
 
 
