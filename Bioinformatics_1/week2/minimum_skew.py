@@ -30,6 +30,10 @@ def minimum_skews(genome: str) -> list:
             skew_list.append(skew_value - 1)
             skew_value -= 1
             index_list.append(index + 1)
+        else:
+            skew_dict[index + 1] = skew_value
+            skew_list.append(skew_value)
+            index_list.append(index+1)
     minimum = min(skew_dict.values())
     min_index = [index for index, skew in skew_dict.items() if skew == minimum]
     print("minimum index: ", min_index)
