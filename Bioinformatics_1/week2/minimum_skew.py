@@ -1,5 +1,6 @@
+import os.path
+import sys
 import matplotlib.pyplot as plt
-import sys, os.path
 
 
 def plot_skew(index_list: list, skew_list: list):
@@ -11,7 +12,7 @@ def minimum_skews(genome: str) -> list:
     """
     minimum_skews functions finds out the position in the genome with the minimum skew in an attempt to identify the
     ori region by taking into account the skew value of the genome Params: genome(str): The genome on which the
-    computation is to be performed on Returns minimum_index(list): The indexes relative to the starting poin where
+    computation is to be performed on Returns minimum_index(list): The indexes relative to the starting point where
     the minimum skew ws observed.
     """
     skew_value: int = 0
