@@ -25,3 +25,10 @@ class TestPatterCount:
         pattern = "AT"
         pc = PatternCount(genome, pattern)
         assert 8 == pc.count()
+
+    def test_frequent(self):
+        genome = "ATTCCTCTATCCTAATCATAATATCCATCATCAT"
+        pattern = "AT"
+        pattern_length = 2
+        pc = PatternCount(genome, pattern, pattern_length)
+        assert ["AT"] == pc.frequent()
