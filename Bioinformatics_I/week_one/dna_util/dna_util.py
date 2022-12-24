@@ -11,7 +11,7 @@ class DNAUtil:
     def reverse_complement(self) -> str:  # O(n)
         reverse_comp = ""
         for index in range(len(self.genome) - 1, -1, -1):
-            reverse_comp += self.genome[index]
+            reverse_comp += self._get_complement(self.genome[index])
         return reverse_comp
 
     def reverse_complement_optimized(self) -> str:  # O(log(n))
@@ -19,16 +19,27 @@ class DNAUtil:
         if len(self.genome) % 2 == 0:
             mid = int(len(self.genome) / 2)
             for index in range(0, mid):
-                genome_list[index], genome_list[-(index + 1)] = genome_list[-(index + 1)], genome_list[index]
+                genome_list[index], genome_list[-(index + 1)] = self._get_complement(
+                    genome_list[-(index + 1)]), self._get_complement(genome_list[index])
             return ''.join(genome_list)
         else:
             last_element = genome_list.pop()
             mid = int(len(genome_list) / 2)
         for index in range(0, mid):
-            genome_list[index], genome_list[-(index + 1)] = genome_list[-(index + 1)], genome_list[index]
-
+            genome_list[index], genome_list[-(index + 1)] = self._get_complement(
+                genome_list[-(index + 1)]), self._get_complement(genome_list[index])
         genome_list.insert(0, last_element)
         return ''.join(genome_list)
+
+    @staticmethod
+    def _get_complement(base: str) -> str:
+        base_map = {
+            "A": "T",
+            "T": "A",
+            "G": "C",
+            "C": "G"
+        }
+        return base_map[base]
 
 
 if __name__ == "__main__":
