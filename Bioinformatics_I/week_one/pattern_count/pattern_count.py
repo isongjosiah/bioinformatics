@@ -24,7 +24,7 @@ class PatternCount:
         # the index to stop the loop at.
         end_index = len(self.genome) - len(self.pattern)
         count = 0
-        for index in range(0, end_index):
+        for index in range(0, end_index + 1):
             if self.genome[index:index + len(self.pattern)] == self.pattern:
                 count += 1
 
@@ -33,9 +33,10 @@ class PatternCount:
     # frequent returns a list of the k-mers that occurs more frequently
     def frequent(self) -> List[str]:
         end_index = len(self.genome) - self.pattern_length
+
         pattern_map = {}  # creates an empty dictionary
 
-        for index in range(0, end_index):
+        for index in range(0, end_index + 1):
             temp_pattern = self.genome[index:index + self.pattern_length]
             if temp_pattern in pattern_map.keys():
                 pattern_map[temp_pattern] += 1
@@ -43,8 +44,6 @@ class PatternCount:
                 pattern_map[temp_pattern] = 1
 
         max_pattern = [key for key, value in pattern_map.items() if value == max(pattern_map.values())]
-        print(pattern_map)
-        print(max_pattern)
 
         return max_pattern
 
@@ -55,7 +54,7 @@ if __name__ == "__main__":
         sys.exit()
 
     parser = argparse.ArgumentParser(
-        description="[Usage]: python patter_count.py -g [file|text] -p [file|text] -k [int]")
+        description="[Usage]: python pattern_count.py -g [file|text] -p [file|text] -k [int]")
     parser.add_argument("-g", "--genome", help="the genome either as a file or text")
     parser.add_argument("-p", "--pattern", help="the patter to search for (optional)")
     parser.add_argument("-k", "--pattern_length", help="the pattern length if you are checking for frequency")
